@@ -7,7 +7,7 @@ def etl_dim_ips(source_conn, target_conn):
     # Load data from the source database
     table = etl.fromdb(source_conn, load_sql)
     # Apply transformations
-    transformed_table = etl.cutout(table, 'nivel')
+    transformed_table = etl.transform.replace(table, 'nivel', '', 0)
     transformed_table = etl.addfield(transformed_table, 'date_from', '2000-01-01')
     transformed_table = etl.addfield(transformed_table, 'date_to', '2030-12-31')
     # Show the transformed data

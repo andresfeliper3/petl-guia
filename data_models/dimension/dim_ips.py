@@ -8,10 +8,11 @@ create_table_sql = """
         , id_ips VARCHAR(40)
         , tipo_ips VARCHAR(40)
         , nombre VARCHAR(300)
+        , nivel VARCHAR(10)
         , direccion VARCHAR(400)
         , municipio VARCHAR(400)
         , departamento VARCHAR(400)
     );
     """
 
-load_sql = """SELECT * FROM ips"""
+load_sql = "SELECT * FROM ips"
