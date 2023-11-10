@@ -8,11 +8,11 @@ def etl_dim_medico(source_conn, target_conn):
     table = etl.fromdb(source_conn, load_sql)
 
     # Apply transformations
-    etl.transform.replace(table, 'subespecialidad', '', 'no tine')
-    transformed_table = etl.transform.replace(table,'direccion_consultorio','','no registra')
+    transformed_table = etl.transform.replace(table, 'subespecialidad', '', 'No registra')
+    transformed_table = etl.transform.replace(transformed_table,'direccion_consultorio',' ','No registra')
 
     # Show the transformed data
-    etl.look(transformed_table)
+    print(etl.look(transformed_table))
     # Create the target table in the target database if it doesn't exist
     create_target_table_manually(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
     #create_target_table_automatically(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)

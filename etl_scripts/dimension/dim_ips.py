@@ -11,7 +11,7 @@ def etl_dim_ips(source_conn, target_conn):
     transformed_table = etl.addfield(transformed_table, 'date_from', '2000-01-01')
     transformed_table = etl.addfield(transformed_table, 'date_to', '2030-12-31')
     # Show the transformed data
-    etl.look(transformed_table)
+    print(etl.look(transformed_table))
     # Create the target table in the target database if it doesn't exist
     create_target_table_manually(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
     #create_target_table_automatically(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)

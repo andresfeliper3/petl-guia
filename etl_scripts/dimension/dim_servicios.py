@@ -9,7 +9,7 @@ def etl_dim_servicios(source_conn, target_conn):
     servicios = np.array([('nombre','descripcion'),('Consulta General', 'Servicio de citas medicas'),('Urgencias', 'Servicio de urgencias'),('Hospitalizacion', 'Servicio de hospitalizacion')])
     table = etl.wrap(servicios)
 
-    table.look()
+    print(etl.look(table))
 
     # Create the target table in the target database if it doesn't exist
     create_target_table_manually(table, target_conn, table_name=TABLE_TARGET_NAME)
