@@ -6,7 +6,7 @@ create_table_sql = """
         , cedula varchar(40)
         , nombre varchar(100)
         , especialidad VARCHAR(40)
-        , sub_especialidad VARCHAR(40)
+        , subespecialidad VARCHAR(40)
         , licencia VARCHAR(50)
         , nivel VARCHAR(10)
         , direccion_consultorio VARCHAR(400)

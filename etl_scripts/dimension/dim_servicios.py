@@ -1,20 +1,18 @@
 import petl as etl
-from data_models.dimension.dim_servicios import create_table_sql, load_sql
+import numpy as np
+from data_models.dimension.dim_servicios import create_table_sql
 
-TABLE_TARGET_NAME = "dim_servicio"
+TABLE_TARGET_NAME = "dim_servicios"
 
-def etl_dim_ips(source_conn, target_conn):
+def etl_dim_servicios(source_conn, target_conn):
     # Load data from the source database
-    servicios = np.array()
-    table = etl.fromarray([()])
-    # Apply transformations
-    transformed_table = etl.transform.replace(table, 'nivel', '', 0)
-    transformed_table = etl.addfield(transformed_table, 'date_from', '2000-01-01')
-    transformed_table = etl.addfield(transformed_table, 'date_to', '2030-12-31')
-    # Show the transformed data
-    etl.look(transformed_table)
+    servicios = np.array([('nombre','descripcion'),('Consulta General', 'Servicio de citas medicas'),('Urgencias', 'Servicio de urgencias'),('Hospitalizacion', 'Servicio de hospitalizacion')])
+    table = etl.wrap(servicios)
+
+    table.look()
+
     # Create the target table in the target database if it doesn't exist
-    create_target_table_manually(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
+    create_target_table_manually(table, target_conn, table_name=TABLE_TARGET_NAME)
     #create_target_table_automatically(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
 
 def create_target_table_manually(table, target_conn, table_name):

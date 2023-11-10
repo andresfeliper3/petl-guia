@@ -2,11 +2,10 @@
 
 create_table_sql = """
     CREATE TABLE IF NOT EXISTS dim_servicios (
-        key_s BIGSERIAL
-        , date_from DATE
-        , date_to DATE
-
+        key_servicio BIGSERIAL
+       , nombre VARCHAR(50)
+       , descripcion VARCHAR (50)
     );
     """
 
-load_sql = "SELECT * FROM dim_servicios "
+#load_sql = "SELECT * FROM dim_servicios "
