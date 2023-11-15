@@ -16,8 +16,8 @@ def close_connections(*connections):
 if __name__ == '__main__':
     try:
         dim_ips.etl_dim_ips(source_conn, target_conn)
-        dim_medico.etl_dim_medico(source_conn, target_conn)
-        dim_servicios.etl_dim_servicios(source_conn, target_conn)
+        #dim_medico.etl_dim_medico(source_conn, target_conn)
+        #dim_servicios.etl_dim_servicios(source_conn, target_conn)
 
     finally:
         close_connections(source_conn, target_conn)

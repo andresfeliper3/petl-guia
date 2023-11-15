@@ -1,6 +1,4 @@
-# Define the schema and table creation SQL for the target database
-
-create_table_sql = """
+dim_ips: |
     CREATE TABLE IF NOT EXISTS dim_ips (
         key_ips BIGSERIAL
         , date_from DATE
@@ -13,6 +11,3 @@ create_table_sql = """
         , municipio VARCHAR(400)
         , departamento VARCHAR(400)
     );
-    """
-
-load_sql = "SELECT * FROM ips"
