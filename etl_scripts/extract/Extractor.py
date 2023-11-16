@@ -7,9 +7,11 @@ queries_path = 'data_models/extract_queries.yaml'
 with open(queries_path, 'r') as file:
     extract_query = yaml.safe_load(file)
 
+
 # Load data from the source database
 class Extractor:
     def __init__(self, source_conn, table_name):
+        self.table = None
         self.table_name = table_name
         self.source_conn = source_conn
 

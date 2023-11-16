@@ -21,3 +21,9 @@ class Loader:
             self.target_conn.commit()
 
         etl.todb(self.table, self.target_conn, self.table_name)
+
+    def get_table(self):
+        return self.table
+
+    def get_table_name(self):
+        return self.table_name
