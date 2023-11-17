@@ -1,30 +1,6 @@
-import petl as etl
-from data_models.dimension.dim_medico import create_table_sql, load_sql
+from etl_scripts.Manager import Manager
+from etl_scripts.extract.extractions import medico_extractor
+from etl_scripts.transform.dim_medico import dim_medico_transformer
+from etl_scripts.load.loaders import dim_medico_loader
 
-TABLE_TARGET_NAME = "dim_medico"
-
-def etl_dim_medico(source_conn, target_conn):
-    # Load data from the source database
-    table = etl.fromdb(source_conn, load_sql)
-
-    # Apply transformations
-    transformed_table = etl.transform.replace(table, 'subespecialidad', '', 'No registra')
-    transformed_table = etl.transform.replace(transformed_table,'direccion_consultorio',' ','No registra')
-
-    # Show the transformed data
-    print(etl.look(transformed_table))
-    # Create the target table in the target database if it doesn't exist
-    create_target_table_manually(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
-    #create_target_table_automatically(transformed_table, target_conn, table_name=TABLE_TARGET_NAME)
-
-def create_target_table_manually(table, target_conn , table_name):
-    with target_conn.cursor() as target_cursor:
-        target_cursor.execute(create_table_sql)
-        target_conn.commit()
-
-    etl.todb(table, target_conn, table_name)
-
-def create_target_table_automatically(table, target_conn, table_name):
-    etl.todb(table, target_conn, table_name, create=True, sample=1000)
-
-
+dim_medico_manager = Manager(extractor=medico_extractor, transformer=dim_medico_transformer, loader=dim_medico_loader)

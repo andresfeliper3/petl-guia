@@ -1,2 +1,3 @@
 
 ips: "SELECT * FROM ips"
+medico: "SELECT * FROM medico"

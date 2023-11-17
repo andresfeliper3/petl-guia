@@ -11,3 +11,22 @@ dim_ips: |
         , municipio VARCHAR(400)
         , departamento VARCHAR(400)
     );
+
+dim_servicios: |
+    CREATE TABLE IF NOT EXISTS dim_servicios (
+        key_servicio BIGSERIAL
+       , nombre VARCHAR(50)
+       , descripcion VARCHAR (50)
+    );
+    
+dim_medico: |
+    CREATE TABLE IF NOT EXISTS dim_medico (
+            key_medico BIGSERIAL
+            , cedula varchar(40)
+            , nombre varchar(100)
+            , especialidad VARCHAR(40)
+            , subespecialidad VARCHAR(40)
+            , licencia VARCHAR(50)
+            , direccion_consultorio VARCHAR(400)
+            , id_ips VARCHAR(130)
+        );
