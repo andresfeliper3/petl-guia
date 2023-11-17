@@ -1,9 +1,8 @@
 import petl as etl
 import numpy as np
-from etl_scripts.transform.Transformer import Transformer
 
 
-def crear_dim_servicios():
+def crear_dim_servicio():
     # Load data from the source database
     servicios = np.array([('nombre', 'descripcion'), ('Consulta General', 'Servicio de citas medicas'),
                           ('Urgencias', 'Servicio de urgencias'), ('Hospitalizacion', 'Servicio de hospitalizacion')])
@@ -11,4 +10,3 @@ def crear_dim_servicios():
     return table
 
 
-dim_servicios_transformer = Transformer(transform_function=crear_dim_servicios)

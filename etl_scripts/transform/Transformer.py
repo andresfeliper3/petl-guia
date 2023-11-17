@@ -4,7 +4,7 @@ import petl as etl
 class Transformer:
     def __init__(self, transform_function=None):
         self.transform_function = transform_function
-        self.table = None
+        self.tables = None
         self.transformed_table = None
 
     def set_transform_function(self, transform_function):
@@ -13,18 +13,22 @@ class Transformer:
     def get_transform_function(self):
         return self.transform_function
 
-    def transform(self, table=None):
-        self.table = table
-        if self.table is None:
+    def transform(self, tables=[]):
+        self.tables = tables
+        if not self.tables:
             self.transformed_table = self.transform_function()
         else:
-            self.transformed_table = self.transform_function(self.table)
+            self.transformed_table = self.transform_function(*self.tables)
 
     def get_transformed_table(self):
         return self.transformed_table
 
-    def get_table(self):
-        return self.table
+    def get_tables(self):
+        return self.tables
 
     def print(self):
-        print(etl.look(self.transformed_table))
+        if self.transformed_table is None:
+            for table in self.tables:
+                print(etl.look(table))
+        else:
+            print(etl.look(self.transformed_table))

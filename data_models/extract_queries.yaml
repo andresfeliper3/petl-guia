@@ -1,3 +1,6 @@
 
 ips: "SELECT * FROM ips"
 medico: "SELECT * FROM medico"
+beneficiario: "SELECT * FROM beneficiario"
+cotizante: "SELECT * FROM cotizante"
+cotizante_beneficiario: "SELECT * FROM cotizante_beneficiario"
