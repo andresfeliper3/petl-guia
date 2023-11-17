@@ -7,4 +7,6 @@ from etl_scripts.transform.dim_persona import transformar_dim_persona
 dim_ips_transformer = Transformer(transform_function=transformar_dim_ips)
 dim_medico_transformer = Transformer(transform_function=transformar_dim_medico)
 dim_servicio_transformer = Transformer(transform_function=crear_dim_servicio)
+
+
 dim_persona_transformer = Transformer(transform_function=transformar_dim_persona)

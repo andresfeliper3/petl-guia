@@ -13,19 +13,18 @@ def run():
         dim_ips_manager.extract()
         dim_medico_manager.extract()
         dim_persona_manager.extract()
-        #dim_persona_manager.print()
 
     if execute_transform:
         dim_ips_manager.transform()
         dim_servicios_manager.transform()
         dim_medico_manager.transform()
-        #dim_persona_manager.transform()
+        dim_persona_manager.transform()
 
     if execute_load:
         dim_ips_manager.load()
         dim_servicios_manager.load()
         dim_medico_manager.load()
-        #dim_persona_manager.load()
+        dim_persona_manager.load()
 
 
 # Press the green button in the gutter to run the script.
