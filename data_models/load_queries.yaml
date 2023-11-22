@@ -44,3 +44,17 @@ dim_persona: |
             , grupo_familiar VARCHAR(400)
             , tipo_discapacidad VARCHAR(130)
         );
+
+dim_fecha: | 
+    CREATE TABLE IF NOT EXISTS dim_fecha
+        (
+          key_date BIGSERIAL
+        , "date" TIMESTAMP
+        , "year" DOUBLE PRECISION
+        , "month" DOUBLE PRECISION
+        , "day_of_month" DOUBLE PRECISION
+        , day_of_week VARCHAR
+        , week_of_month DOUBLE PRECISION
+        , day_of_year DOUBLE PRECISION
+        , week_of_year DOUBLE PRECISION
+    );
