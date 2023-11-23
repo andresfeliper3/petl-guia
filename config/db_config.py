@@ -16,3 +16,9 @@ target_conn = psycopg2.connect(
     password=env['db_password'],
     port=env['db_port']
 )
+psa_conn = psycopg2.connect(
+    host=env['db_host'],
+    database=env['db_psa'],
+    user=env['db_user'],
+    password=env['db_password'],
+    port=env['db_port'])
