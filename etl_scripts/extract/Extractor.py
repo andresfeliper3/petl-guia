@@ -18,8 +18,10 @@ class Extractor:
 
     def extract(self):
         self.table = etl.fromdb(self.source_conn, extract_query[self.table_name])
-        #se guarda la tabla en PSA database
-        etl.todb(self.table, self.psa_conn, self.table_name, create=True)
+        # se guarda la tabla en PSA database
+
+        #etl.todb(self.table, self.psa_conn, self.table_name, create=True, drop=True, dialect='postgresql')
+
 
     def print(self):
         print(etl.look(self.table))

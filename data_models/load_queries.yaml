@@ -58,3 +58,18 @@ dim_fecha: |
         , day_of_year DOUBLE PRECISION
         , week_of_year DOUBLE PRECISION
     );
+trans_servicio: |
+    CREATE TABLE IF NOT EXISTS trans_servicio
+    (
+        key_tran_servicio BIGSERIAL
+    ,   codigo_servicio varchar(40)
+    ,   id_usuario varchar(40)
+    ,   id_medico varchar(40)
+    ,   fecha_solicitud date
+    ,   hora_solicitud time
+    ,   fecha_atencion date
+    ,   hora_atencion time
+    ,   fecha_hora_atencion timestamp
+    ,   fecha_hora_solicitud timestamp
+    ,   tipo_servicio   varchar(40)
+    );
