@@ -1,5 +1,5 @@
 import petl as etl
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 
 def generate_dates(start_date, num_rows):
@@ -11,7 +11,7 @@ def get_day_name(date):
 
 def crear_dim_fecha():
     # Start date
-    start_date = datetime(2000, 1, 1)
+    start_date = date(2000, 1, 1)
 
     # Number of rows
     num_rows = 10000
