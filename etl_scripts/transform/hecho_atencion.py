@@ -1,11 +1,21 @@
 import petl as etl
 
 def crear_hecho_atencion(persona, medico, ips, fecha,servicios,trans_servicios):
+    """
+
+    :param persona:
+    :param medico:
+    :param ips:
+    :param fecha:
+    :param servicios:
+    :param trans_servicios:
+    :return:
+    """
     persona = etl.cut(persona, 'key_persona', 'numero_identificacion')
     merge1 = etl.join(persona, trans_servicios, lkey='numero_identificacion', rkey='id_usuario')
     medico = etl.cut(medico, 'key_medico', 'cedula', 'id_ips')
     merge2 = etl.join(merge1, medico, lkey='id_medico', rkey='cedula')
-    dim_ips = etl.cut(ips, 'key_ips', 'id_ips')
+    ips = etl.cut(ips, 'key_ips', 'id_ips')
     merge3 = etl.join(ips, merge2)
     servicios = etl.cut(servicios, 'key_servicio', 'nombre')
     merge4 = etl.join(merge3, servicios, rkey='nombre', lkey='tipo_servicio')

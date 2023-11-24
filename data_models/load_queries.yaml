@@ -74,3 +74,19 @@ trans_servicio: |
     ,   fecha_hora_solicitud timestamp
     ,   tipo_servicio   varchar(40)
     );
+
+hecho_atencion : |
+    CREATE TABLE IF NOT EXISTS hecho_atencion
+    (
+        key_hecho_atencion BIGSERIAL
+    ,   key_persona integer
+    ,   key_ips integer
+    ,   key_tran_servicio integer
+    ,   key_medico integer
+    ,   key_servicio integer
+    ,   key_date_atencion integer
+    ,   key_date_solicitud integer
+    ,   tiempo_espera_dias integer
+    ,   tiempo_espera_minutos integer
+    ,   tiempo_espera_horas integer
+    )

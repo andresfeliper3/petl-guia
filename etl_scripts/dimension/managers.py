@@ -14,3 +14,7 @@ dim_fecha_manager = Manager(transformer=trans.dim_fecha_transformer, loader=load
 trans_servicio_manager = Manager(
     extractors=[ext.urgencias_extractor, ext.hospitalizacion_extractor, ext.citas_extractor],
     transformer=trans.trans_servicio_transformer, loader=load.trans_servicio_loader)
+hecho_atencion_manager = Manager(extractors=[ext.dim_persona_extractor,ext.dim_medico_extractor,ext.dim_ips_extractor,
+                                     ext.dim_fecha_extractor,ext.dim_servicios_extractor,ext.trans_servicios_extractor],
+                         transformer=trans.hecho_atencion_transfermer,loader=load.hecho_atencion_loader)
+
