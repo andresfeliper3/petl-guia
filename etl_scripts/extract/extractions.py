@@ -7,3 +7,6 @@ medico_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn, table_n
 cotizante_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn, table_name="cotizante")
 beneficiario_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn, table_name="beneficiario")
 cotizante_beneficiario_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn, table_name="cotizante_beneficiario")
+urgencias_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn,table_name="urgencias")
+hospitalizacion_extractor = Extractor(source_conn=source_conn, psa_conn= psa_conn, table_name="hospitalizacion")
+citas_extractor = Extractor(source_conn=source_conn, psa_conn=psa_conn, table_name="citas_generales")
