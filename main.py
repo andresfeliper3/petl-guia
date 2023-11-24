@@ -14,7 +14,7 @@ def run():
         dim_medico_manager.extract()
         dim_persona_manager.extract()
         mg.trans_servicio_manager.extract()
-        mg.hecho_atencion_manager.extract()
+
 
     if execute_transform:
         dim_ips_manager.transform()
@@ -23,7 +23,7 @@ def run():
         dim_persona_manager.transform()
         dim_fecha_manager.transform()
         mg.trans_servicio_manager.transform()
-        mg.hecho_atencion_manager.transform()
+
     if execute_load:
         dim_ips_manager.load()
         dim_servicios_manager.load()
@@ -31,7 +31,10 @@ def run():
         dim_persona_manager.load()
         dim_fecha_manager.load()
         mg.trans_servicio_manager.load()
-        mg.hecho_atencion_manager.load()
+
+    mg.hecho_atencion_manager.extract()
+    mg.hecho_atencion_manager.transform()
+    mg.hecho_atencion_manager.load()
 
 
 # Press the green button in the gutter to run the script.

@@ -10,17 +10,18 @@ with open(queries_path, 'r') as file:
 
 # Load data from the source database
 class Extractor:
-    def __init__(self, source_conn, psa_conn, table_name):
+    def __init__(self, table_name, source_conn, psa_conn=None, source: bool = False):
         self.table = None
         self.table_name = table_name
         self.source_conn = source_conn
         self.psa_conn = psa_conn
+        self.source = source
 
     def extract(self):
         self.table = etl.fromdb(self.source_conn, extract_query[self.table_name])
         # se guarda la tabla en PSA database
-
-        #etl.todb(self.table, self.psa_conn, self.table_name, create=True, drop=True, dialect='postgresql')
+        if self.source:
+            etl.todb(self.table, self.psa_conn, self.table_name, create=True)
 
 
 
