@@ -7,8 +7,8 @@ def crear_trasn_servicio(urgencias, hospitalizacion, citas):
 
     #Anadir tipo_servicio
     urgencias = etl.addfield(urgencias,'tipo_servicio','Urgencias')
-    hospitalizacion = etl.addfield(hospitalizacion, 'tipo_servicio', 'Urgencias')
-    citas = etl.addfield(citas, 'tipo_servicio', 'Urgencias')
+    hospitalizacion = etl.addfield(hospitalizacion, 'tipo_servicio', 'Hospitalización')
+    citas = etl.addfield(citas, 'tipo_servicio', 'Consulta General')
 
     # Renonbrar campo codigo_servicio
     urgencias = etl.rename(urgencias,'codigo_urgencia','codigo_servicio')
