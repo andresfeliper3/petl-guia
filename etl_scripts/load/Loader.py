@@ -20,6 +20,8 @@ class Loader:
             target_cursor.execute(load_query[self.table_name])
             self.target_conn.commit()
 
+        print("***********")
+        print(self.table)
         etl.todb(self.table, self.target_conn, self.table_name)
 
     def get_table(self):
