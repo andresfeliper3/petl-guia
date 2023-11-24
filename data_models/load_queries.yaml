@@ -59,6 +59,7 @@ dim_fecha: |
         , week_of_year DOUBLE PRECISION
     );
 trans_servicio: |
+
     CREATE TABLE IF NOT EXISTS trans_servicio
     (
         key_tran_servicio BIGSERIAL

@@ -23,6 +23,7 @@ class Extractor:
         #etl.todb(self.table, self.psa_conn, self.table_name, create=True, drop=True, dialect='postgresql')
 
 
+
     def print(self):
         print(etl.look(self.table))
 
