@@ -3,6 +3,7 @@ import etl_scripts.extract.extractions as ext
 import etl_scripts.transform.transformers as trans
 import etl_scripts.load.loaders as load
 
+
 dim_ips_manager = Manager(extractors=[ext.ips_extractor], transformer=trans.dim_ips_transformer, loader=load.dim_ips_loader)
 dim_medico_manager = Manager(extractors=[ext.medico_extractor], transformer=trans.dim_medico_transformer,
                              loader=load.dim_medico_loader)
@@ -17,4 +18,6 @@ trans_servicio_manager = Manager(
 hecho_atencion_manager = Manager(extractors=[ext.dim_persona_extractor,ext.dim_medico_extractor,ext.dim_ips_extractor,
                                      ext.dim_fecha_extractor,ext.dim_servicios_extractor,ext.trans_servicios_extractor],
                          transformer=trans.hecho_atencion_transfermer,loader=load.hecho_atencion_loader)
-
+managers = {'dim_ips':dim_ips_manager, 'dim_medico':dim_medico_manager,'dim_servicios':dim_servicios_manager,
+            'dim_persona':dim_persona_manager,'dim_fecha': dim_fecha_manager, 'trans_servicios': trans_servicio_manager,
+            'hehco_atencion':hecho_atencion_manager}

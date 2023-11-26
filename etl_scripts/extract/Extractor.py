@@ -21,7 +21,8 @@ class Extractor:
         self.table = etl.fromdb(self.source_conn, extract_query[self.table_name])
         # se guarda la tabla en PSA database
         if self.source:
-            etl.todb(self.table, self.psa_conn, self.table_name, create=True)
+            pass
+           # etl.todb(self.table, self.psa_conn, self.table_name, create=True)
 
 
 

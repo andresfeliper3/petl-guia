@@ -1,3 +1,4 @@
+import pandas
 import petl as etl
 import psycopg2
 from config.env_config import env
@@ -8,6 +9,7 @@ target_conn = psycopg2.connect(
     password=env['db_password'],
     port=env['db_port']
 )
+
 
 persona = etl.fromdb(target_conn,'select * from dim_persona')
 trans_servicios = etl.fromdb(target_conn,'select * from trans_Servicio')
@@ -33,4 +35,6 @@ merge6 = etl.addfield(merge6,'tiempo_espera_dias',lambda row:(row['fecha_hora_at
 merge6 = etl.addfield(merge6,'tiempo_espera_minutos',lambda row:(row['fecha_hora_atencion']-row['fecha_hora_solicitud']).seconds // 60)
 merge6 = etl.addfield(merge6,'tiempo_espera_horas',lambda row: row['tiempo_espera_minutos']//60)
 merge6 = etl.cut(merge6,'key_ips','key_persona','key_tran_servicio','key_medico','key_servicio','key_date_atencion','key_date_solicitud','tiempo_espera_dias','tiempo_espera_minutos','tiempo_espera_horas')
-print(merge6.look())
+df = etl.todataframe(merge6)
+print(df)
+df.to_sql('asd',target_conn,if_exists='replace')

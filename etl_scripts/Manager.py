@@ -2,7 +2,8 @@ import petl as etl
 
 
 class Manager:
-    def __init__(self, extractors=None, transformer=None, loader=None):
+    def __init__(self, extractors=None, transformer=None, loader=None, table: str = None):
+        self.table = table
         self.extractors = extractors or []
         self.transformer = transformer
         self.loader = loader
