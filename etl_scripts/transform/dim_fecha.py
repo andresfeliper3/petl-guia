@@ -30,5 +30,4 @@ def crear_dim_fecha():
         .addfield('day_of_year', lambda row: row['date'].timetuple().tm_yday)
         .addfield('week_of_year', lambda row: row['date'].isocalendar()[1])
     )
-    print(table)
     return table
