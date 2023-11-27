@@ -17,13 +17,16 @@ class Manager:
         for extractor in self.extractors:
             try:
                 extractor.extract()
-                logger_process.info(f"Process {self.manager_name}: table {extractor.get_table_name()} extracted")
                 extracted_table = extractor.get_table()
-                self.tables.append(extracted_table)
-                logger_tables_extract.info(f"Process {self.manager_name}: table {extractor.get_table_name()} extracted")
-                logger_tables_extract.info(etl.head(extracted_table))
+                if extracted_table is not None:
+                    logger_process.info(f"Process {self.manager_name}: table {extractor.get_table_name()} extracted")
+                    self.tables.append(extracted_table)
+                    logger_tables_extract.info(
+                        f"Process {self.manager_name}: table {extractor.get_table_name()} extracted")
+                    logger_tables_extract.info(etl.head(extracted_table))  # Move this line here
             except Exception as e:
-                logger_process.error(f'Error in process {self.manager_name} extracting data from {extractor.get_table_name()} table: {e}',
+                logger_process.error(f'Error in process {self.manager_name} extracting data from '
+                                     f'{extractor.get_table_name()} table: {e}',
                                      exc_info=True)
 
     def check_if_extractors_available(self):

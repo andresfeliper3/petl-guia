@@ -35,7 +35,7 @@ fact_managers_dict = {
         'hecho_atencion',
         extractors=[
             ext.dim_persona_extractor, ext.dim_medico_extractor, ext.dim_ips_extractor,
-            ext.dim_fecha_extractor, ext.dim_servicios_extractor, ext.trans_servicios_extractor
+            ext.dim_fecha_extractor, ext.dim_servicio_extractor, ext.trans_servicios_extractor
         ],
         transformer=trans.hecho_atencion_transformer,
         loader=load.hecho_atencion_loader

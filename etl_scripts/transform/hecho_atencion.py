@@ -1,6 +1,7 @@
 import petl as etl
 
-def crear_hecho_atencion(persona, medico, ips, fecha,servicios,trans_servicios):
+
+def crear_hecho_atencion(persona, medico, ips, fecha, servicios, trans_servicios):
     """
 
     :param persona:
