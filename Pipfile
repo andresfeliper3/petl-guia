@@ -8,6 +8,7 @@ psycopg2 = "*"
 petl = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
+pyyaml = "*"
 
 [dev-packages]
 
