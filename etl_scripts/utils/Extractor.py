@@ -31,3 +31,6 @@ class Extractor:
 
     def get_table(self):
         return self.table
+
+    def get_table_name(self):
+        return self.table_name

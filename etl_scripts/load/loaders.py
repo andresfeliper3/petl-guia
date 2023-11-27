@@ -1,4 +1,4 @@
-from etl_scripts.load.LoaderFactory import LoaderFactory
+from etl_scripts.utils.LoaderFactory import LoaderFactory
 
 loader_factory = LoaderFactory()
 

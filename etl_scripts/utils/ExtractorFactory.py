@@ -1,4 +1,4 @@
-from etl_scripts.extract.Extractor import Extractor
+from etl_scripts.utils.Extractor import Extractor
 from config.db_config import target_conn, source_conn, psa_conn
 
 

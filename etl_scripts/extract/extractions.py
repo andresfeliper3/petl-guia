@@ -1,6 +1,4 @@
-from etl_scripts.extract.ExtractorFactory import ExtractorFactory
-from config.db_config import source_conn, psa_conn
-from etl_scripts.extract.Extractor import Extractor
+from etl_scripts.utils.ExtractorFactory import ExtractorFactory
 
 extractor_factory = ExtractorFactory()
 

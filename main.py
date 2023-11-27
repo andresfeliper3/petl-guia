@@ -1,56 +1,71 @@
 # Press Mayús+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-import petl as etl
-from etl_scripts.dimension.managers import dim_medico_manager, dim_servicios_manager, dim_ips_manager, dim_persona_manager, dim_fecha_manager
-from etl_scripts.dimension.managers import managers
-import etl_scripts.dimension.managers as mg
 import sys
-execute_extract = True
-execute_transform = True
-execute_load = True
+import petl as etl
+from etl_scripts.dimension.managers import managers
 
-def runAll():
+
+def run_etl_all():
     for manager in managers:
-        manager.execute_all()
+        manager.execute_etl()
 
-def runSelected(manager:str):
-    try :
-        managers[manager].excecute_all()
-    except :
-        print('transformacion no encontrada')
-def run():
+
+def run_etl_one_table(manager: str):
+
+    managers[manager].execute_etl()
+
+
+
+def run_phase_one_table(manager: str, execute_extract=False, execute_transform=False, execute_load=False):
     if execute_extract:
-        dim_ips_manager.extract()
-        dim_medico_manager.extract()
-        dim_persona_manager.extract()
-        mg.trans_servicio_manager.extract()
-
+        managers[manager].extract()
 
     if execute_transform:
-        dim_ips_manager.transform()
-        dim_servicios_manager.transform()
-        dim_medico_manager.transform()
-        dim_persona_manager.transform()
-        dim_fecha_manager.transform()
-        mg.trans_servicio_manager.transform()
+        managers[manager].transform()
 
     if execute_load:
-        dim_ips_manager.load()
-        dim_servicios_manager.load()
-        dim_medico_manager.load()
-        dim_persona_manager.load()
-        dim_fecha_manager.load()
-        mg.trans_servicio_manager.load()
+        managers[manager].load()
 
-    mg.hecho_atencion_manager.extract()
-    mg.hecho_atencion_manager.transform()
-    mg.hecho_atencion_manager.load()
+
+def run_phase_all(execute_extract=False, execute_transform=False, execute_load=False):
+    for manager in managers:
+        if execute_extract:
+            manager.extract()
+
+        if execute_transform:
+            manager.transform()
+
+        if execute_load:
+            manager.load()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    ETL_ACTION = 'etl'
+    EXTRACT_ACTION = 'extract'
+    TRANSFORM_ACTION = 'transform'
+    ALL_TABLES = 'all'
+
     try:
-        sys.argv[1]
-        runSelected(sys.argv[1])
-    except :
-        run()
+        action = sys.argv[1]
+        table = sys.argv[2]
+
+    except:
+        print("Invalid arguments")
+
+    if action == EXTRACT_ACTION:
+        if table == ALL_TABLES:
+            run_phase_all(execute_extract=True)
+        else:
+            run_phase_one_table(manager=table, execute_extract=True)
+    elif action == TRANSFORM_ACTION:
+        if table == ALL_TABLES:
+            run_phase_all(execute_extract=True, execute_transform=True)
+        else:
+            run_phase_one_table(manager=table, execute_extract=True, execute_transform=True)
+    elif action == ETL_ACTION:
+        if table == ALL_TABLES:
+            run_etl_all()
+        else:
+            run_etl_one_table(table)
+

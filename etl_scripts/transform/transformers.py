@@ -1,4 +1,4 @@
-from etl_scripts.transform.Transformer import Transformer
+from etl_scripts.utils.Transformer import Transformer
 from etl_scripts.transform.dim_ips import transformar_dim_ips
 from etl_scripts.transform.dim_medico import transformar_dim_medico
 from etl_scripts.transform.dim_servicio import crear_dim_servicio
