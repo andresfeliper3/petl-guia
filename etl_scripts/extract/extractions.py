@@ -1,4 +1,4 @@
-from etl_scripts.utils.ExtractorFactory import ExtractorFactory
+from etl_scripts.utils.extract.ExtractorFactory import ExtractorFactory
 
 extractor_factory = ExtractorFactory()
 

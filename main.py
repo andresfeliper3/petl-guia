@@ -1,66 +1,68 @@
-
 import sys
 import petl as etl
-from etl_scripts.dimension.managers import managers_dict
+from etl_scripts.managers.managers import dim_managers_dict, trans_managers_dict, fact_managers_dict
+
+EXTRACT_ACTION = 'extract'
+TRANSFORM_ACTION = 'transform'
+LOAD_ACTION = 'load'
+ALL_TABLES = 'all'
+DIMENSION_TABLES = 'dimensions'
+TRANS_TABLES = 'trans'
+FACT_TABLES = 'facts'
 
 
-def run_etl_all():
-    for manager in managers_dict.values():
-        manager.execute_etl()
-
-
-def run_etl_one_table(manager: str):
-    managers_dict[manager].execute_etl()
-
-
-def run_phase_one_table(manager: str, execute_extract=False, execute_transform=False, execute_load=False):
-    if execute_extract:
-        managers_dict[manager].extract()
-
-    if execute_transform:
-        managers_dict[manager].transform()
-
-    if execute_load:
-        managers_dict[manager].load()
-
-
-def run_phase_all(execute_extract=False, execute_transform=False, execute_load=False):
-    for manager in managers_dict.values():
-        if execute_extract:
-            manager.extract()
-
-        if execute_transform:
-            manager.transform()
-
-        if execute_load:
-            manager.load()
-
-
-if __name__ == '__main__':
-    LOAD_ACTION = 'load'
-    EXTRACT_ACTION = 'extract'
-    TRANSFORM_ACTION = 'transform'
-    ALL_TABLES = 'all'
-
+def parse_arguments():
     try:
         action = sys.argv[1]
         table = sys.argv[2]
+        return action, table
     except IndexError:
-        print("Please provide both action and table arguments.")
-        sys.exit(1)
+        print("Please provide both action and table arguments. Example: py main.py load table_name")
+        return None
     except Exception as e:
         print(f"Error parsing command-line arguments: {e}")
+        return None
+
+
+def execute_phases_for_managers(managers, execute_extract, execute_transform, execute_load):
+    for manager_instance in managers.values():
+        manager_instance.execute_phases(execute_extract, execute_transform, execute_load)
+
+
+def main():
+    args = parse_arguments()
+    if args is None:
         sys.exit(1)
 
-    if action in [EXTRACT_ACTION, TRANSFORM_ACTION, LOAD_ACTION]:
-        execute_extract = action == EXTRACT_ACTION or action == TRANSFORM_ACTION or action == LOAD_ACTION
-        execute_transform = action == TRANSFORM_ACTION or action == LOAD_ACTION
-        execute_load = action == LOAD_ACTION
+    action, table = args
 
-        if table == ALL_TABLES:
-            run_phase_all(execute_extract, execute_transform, execute_load)
-        else:
-            run_phase_one_table(manager=table, execute_extract=execute_extract, execute_transform=execute_transform,
-                                execute_load=execute_load)
+    if action not in [EXTRACT_ACTION, TRANSFORM_ACTION, LOAD_ACTION]:
+        print("Please provide a valid action (extract, transform, load).")
+        sys.exit(1)
+
+    execute_extract = action in [EXTRACT_ACTION, TRANSFORM_ACTION, LOAD_ACTION]
+    execute_transform = action in [TRANSFORM_ACTION, LOAD_ACTION]
+    execute_load = action == LOAD_ACTION
+
+    all_managers = dim_managers_dict | trans_managers_dict | fact_managers_dict
+
+    if table == ALL_TABLES:
+        all_managers = dim_managers_dict | trans_managers_dict | fact_managers_dict
+        execute_phases_for_managers(all_managers, execute_extract, execute_transform, execute_load)
+    elif table == DIMENSION_TABLES:
+        execute_phases_for_managers(dim_managers_dict, execute_extract, execute_transform, execute_load)
+    elif table == TRANS_TABLES:
+        execute_phases_for_managers(trans_managers_dict, execute_extract, execute_transform, execute_load)
+    elif table == FACT_TABLES:
+        execute_phases_for_managers(fact_managers_dict, execute_extract, execute_transform, execute_load)
     else:
-        print(f"Please provide a valid action (extract, transform, load).")
+        etl_manager = all_managers.get(table)
+        if etl_manager:
+            etl_manager.execute_phases(execute_extract, execute_transform, execute_load)
+        else:
+            print(f"Process '{table}' not found.")
+            sys.exit(1)
+
+
+if __name__ == '__main__':
+    main()

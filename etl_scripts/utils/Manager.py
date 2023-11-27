@@ -3,7 +3,8 @@ from logs.logger import logger_tables_extract, logger_tables_transform, logger_t
 
 
 class Manager:
-    def __init__(self, extractors=None, transformer=None, loader=None):
+    def __init__(self, manager_name, extractors=None, transformer=None, loader=None):
+        self.manager_name = manager_name
         self.extractors = extractors or []
         self.transformer = transformer
         self.loader = loader
@@ -22,9 +23,8 @@ class Manager:
                 logger_tables_extract.info(f"Table {extractor.get_table_name()} extracted")
                 logger_tables_extract.info(etl.head(extracted_table))
             except Exception as e:
-                logger_process.error(f'Error in extracting data from {extractor.get_table_name()} table: {e}', exc_info=True)
-
-
+                logger_process.error(f'Error in extracting data from {extractor.get_table_name()} table: {e}',
+                                     exc_info=True)
 
     def check_if_extractors_available(self):
         if not self.extractors:
@@ -44,15 +44,13 @@ class Manager:
         logger_process.info(f"Table {self.loader.get_table_name()} loaded!")
         logger_tables_load.info(f"Table {self.loader.get_table_name()} loaded")
 
+    def execute_phases(self, execute_extract: bool, execute_transform: bool, execute_load: bool):
+        if execute_extract:
+            self.extract()
 
-    def execute_etl(self):
-        self.extract()
-        self.transform()
-        self.load()
+        if execute_transform:
+            self.transform()
 
-    def print(self):
-        if self.transformed_table is None:
-            for table in self.tables:
-                print(etl.look(table))
-        else:
-            print(etl.look(self.transformed_table))
+        if execute_load:
+            self.load()
+

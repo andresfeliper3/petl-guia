@@ -12,8 +12,8 @@ dim_ips: |
         , departamento VARCHAR(400)
     );
 
-dim_servicios: |
-    CREATE TABLE IF NOT EXISTS dim_servicios (
+dim_servicio: |
+    CREATE TABLE IF NOT EXISTS dim_servicio (
         key_servicio BIGSERIAL
        , nombre VARCHAR(50)
        , descripcion VARCHAR (50)

@@ -36,7 +36,8 @@ def configure_logger(logger_name, log_folder, subfolder=None, to_file=True, to_c
 
 # Example usage
 logger_process = configure_logger('process', os.path.join(logs_folder, 'process'))
-logger_tables_extract = configure_logger('extract', os.path.join(logs_folder, 'tables'), subfolder='extract', to_console=True)
+logger_tables_extract = configure_logger('extract', os.path.join(logs_folder, 'tables'), subfolder='extract',
+                                         to_console=False)
 logger_tables_transform = configure_logger('transform', os.path.join(logs_folder, 'tables'), subfolder='transform',
                                            to_console=False)
 logger_tables_load = configure_logger('load', os.path.join(logs_folder, 'tables'), subfolder='load', to_console=False)

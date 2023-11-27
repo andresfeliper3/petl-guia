@@ -1,4 +1,4 @@
-from etl_scripts.utils.Loader import Loader
+from etl_scripts.utils.load.Loader import Loader
 from config.db_config import target_conn
 
 

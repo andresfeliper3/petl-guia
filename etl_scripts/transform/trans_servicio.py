@@ -1,7 +1,7 @@
 from datetime import datetime
 import petl as etl
 
-def crear_trasn_servicio(urgencias, hospitalizacion, citas):
+def crear_trans_servicio(urgencias, hospitalizacion, citas):
     cols_seleccionadas = ['codigo_servicio','id_usuario','id_medico','fecha_solicitud','hora_solicitud','fecha_atencion'
         ,'hora_atencion','tipo_servicio']
 
