@@ -9,6 +9,7 @@ petl = "*"
 sqlalchemy = "*"
 python-dotenv = "*"
 pyyaml = "*"
+pandas = "*"
 
 [dev-packages]
 

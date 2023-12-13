@@ -42,10 +42,16 @@ class Manager:
         logger_process.info(f" Process {self.manager_name}:Transformation complete")
 
     def load(self):
-        self.loader.load(self.transformed_table)
-        logger_tables_load.info(self.transformed_table)
-        logger_process.info(f"Process {self.manager_name}: table {self.loader.get_table_name()} loaded!")
-        logger_tables_load.info(f"Process {self.manager_name}: table {self.loader.get_table_name()} loaded")
+        try:
+            self.loader.load(self.transformed_table)
+            logger_tables_load.info(self.transformed_table)
+            logger_process.info(f"Process {self.manager_name}: table {self.loader.get_table_name()} loaded!")
+            logger_tables_load.info(f"Process {self.manager_name}: table {self.loader.get_table_name()} loaded")
+        except Exception as e:
+            # Log an error message if an exception occurs during loading
+            error_message = f"Error loading table: {str(e)}"
+            logger_tables_load.error(error_message)
+            logger_process.error(error_message)
 
     def execute_phases(self, execute_extract: bool, execute_transform: bool, execute_load: bool):
         if execute_extract:
